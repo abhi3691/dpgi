@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Dimensions,
   ToastAndroid,
+  Alert
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import auth from '@react-native-firebase/auth';
@@ -17,9 +18,14 @@ const windowHeight = Dimensions.get('window').height;
 export default function LoginScreen({ navigation }) {
   const [PhonePage, setPhonePage] = useState(true);
   const [emailPage, setEmailPage] = useState(false);
+  const [emailId, setEmailId] = useState(null)
+  const [password, setPassword] = useState(null)
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [conform, setConfirm] = useState(null);
+  const [result, setResult] = useState(null);
 
+
+  // ------------------------- PHONE LOGIN ----------------------------
   const GetOtp = async () => {
     console.log(phoneNumber)
     auth()
@@ -51,6 +57,33 @@ export default function LoginScreen({ navigation }) {
       });
 
   };
+
+  // ------------------------- EMAIL LOGIN ----------------------------
+
+  const SignIn = () => {
+    if (emailId && password != null) {
+      auth()
+        .signInWithEmailAndPassword(emailId, password)
+        .then(res => {
+          console.log('response', res);
+          setResult(res);
+          navigation.navigate('Tabs', result);
+        })
+        .catch(error => {
+          console.log('error', error);
+          Alert.alert(error.message);
+        });
+    } else {
+      console.log('error', error);
+      ToastAndroid.showWithGravityAndOffset(
+        'Email and Password Empty',
+        ToastAndroid.LONG,
+        ToastAndroid.BOTTOM,
+        25,
+        50
+      );
+    }
+  }
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -98,16 +131,20 @@ export default function LoginScreen({ navigation }) {
               <TextInput
                 style={styles.inputStyle}
                 placeholder="Enter your Email ID"
+                value={emailId}
+                onChangeText={(text) => setEmailId(text)}
                 keyboardType="email-address"></TextInput>
             </View>
             <View style={styles.inputContainer2}>
               <TextInput
                 style={styles.inputStyle}
                 placeholder="Enter Your Password"
+                value={password}
+                onChangeText={(text) => setPassword(text)}
                 secureTextEntry={true}></TextInput>
             </View>
             <TouchableOpacity style={styles.OtpButton}
-              onPress={() => navigation.navigate('Tabs')}
+              onPress={() => SignIn()}
             >
               <Text style={styles.OtpButtonText}>Login</Text>
             </TouchableOpacity>
