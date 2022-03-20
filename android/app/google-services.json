@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "167838915114",
+    "project_id": "dpgi-3422e",
+    "storage_bucket": "dpgi-3422e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167838915114:android:3085d1eb7aefb1bc3b0153",
+        "android_client_info": {
+          "package_name": "com.dpgi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167838915114-kfn2b9f6o2bsgo6hdoj3884b4rle3bld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuQ8JtgNCMUmRSuIAqGIPFgclThMI6sl8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167838915114-kfn2b9f6o2bsgo6hdoj3884b4rle3bld.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
