@@ -20,17 +20,23 @@ export default function LoginScreen({ navigation }) {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [conform, setConfirm] = useState(null);
 
-  useEffect(() => {
-    if (conform !== null) {
-      navigation.navigate('Home')
-    }
-  })
   const GetOtp = async () => {
     console.log(phoneNumber)
     auth()
       .signInWithPhoneNumber("+91" + phoneNumber)
       .then(res => {
         console.log('response', res);
+        if (res) {
+          setConfirm(res)
+          navigation.navigate('Otp', { confirm: res })
+          ToastAndroid.showWithGravityAndOffset(
+            'OTP Generated',
+            ToastAndroid.LONG,
+            ToastAndroid.BOTTOM,
+            25,
+            50
+          );
+        }
       })
       .catch(error => {
         console.log('error', error);
@@ -41,8 +47,8 @@ export default function LoginScreen({ navigation }) {
           25,
           50
         );
+        setConfirm(null)
       });
-    setConfirm(res);
 
   };
 
@@ -100,7 +106,9 @@ export default function LoginScreen({ navigation }) {
                 placeholder="Enter Your Password"
                 secureTextEntry={true}></TextInput>
             </View>
-            <TouchableOpacity style={styles.OtpButton}>
+            <TouchableOpacity style={styles.OtpButton}
+              onPress={() => navigation.navigate('Tabs')}
+            >
               <Text style={styles.OtpButtonText}>Login</Text>
             </TouchableOpacity>
           </View>
