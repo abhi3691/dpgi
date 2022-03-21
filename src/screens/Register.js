@@ -1,10 +1,15 @@
 import { StyleSheet, Text, View, Dimensions, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
-
+import databse from '@react-native-firebase/storage'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default function Register() {
+  const [username, setUsername] = useState(null)
+  const [email, setEmail] = useState(null)
+  const [mobileNumber, setMobileNumber] = useState(null)
+  const [password, setPassword] = useState(null)
+  const [confirmPassword, setConfirmPassword] = useState(null)
   return (
 
     <ScrollView style={styles.container}

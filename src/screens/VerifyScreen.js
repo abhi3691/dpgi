@@ -43,9 +43,9 @@ export default function VerifyScreen(props) {
 
 
         }
-        catch (error) {
+        catch ({ error }) {
             ToastAndroid.showWithGravityAndOffset(
-                'invalided OTP',
+                error,
                 ToastAndroid.LONG,
                 ToastAndroid.BOTTOM,
                 25,
