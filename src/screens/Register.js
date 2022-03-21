@@ -74,19 +74,23 @@ export default function Register() {
               onChangeText={text => setUsername(text)}
             />
             <TextInput style={styles.inputText} placeholder="Email"
+              keyboardType='email'
               value={email}
               onChangeText={text => setEmail(text)}
             />
             <TextInput style={styles.inputText} placeholder="Mobile Number"
               value={mobileNumber}
+              keyboardType='number-pad'
               onChangeText={text => setMobileNumber(text)} />
             <TextInput style={styles.inputText} placeholder="password"
               value={password}
+              secureTextEntry={true}
               onChangeText={text => setPassword(text)}
             />
             <TextInput
               style={styles.inputText}
               value={confirmPassword}
+              secureTextEntry={true}
               onChangeText={text => setConfirmPassword(text)}
               placeholder="Re-Enter password"
             />
