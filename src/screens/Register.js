@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import Header from '../components/Header';
-import databse from '@react-native-firebase/storage';
+import database from '@react-native-firebase/storage';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default function Register() {
@@ -20,6 +20,28 @@ export default function Register() {
   const [mobileNumber, setMobileNumber] = useState(null);
   const [password, setPassword] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(null);
+
+  const addItem = (name, emailId, mobile, pass) => {
+    database().ref('/Items').push({
+      username: name,
+      email: emailId,
+      mobileNumber: mobile,
+      password: pass,
+
+    });
+
+  }
+  const handleSubmit = () => {
+    if ((username && email && mobileNumber && password && confirmPassword != null) && password === confirmPassword) {
+      addItem(username, email, mobileNumber, password);
+      setEmail(null)
+      setMobileNumber(null)
+      setPassword(null)
+      setConfirmPassword(null)
+      setUsername(null)
+      Alert.alert('item Saved Successfully');
+    }
+  }
   return (
     <ScrollView
       style={styles.container}
@@ -69,7 +91,9 @@ export default function Register() {
               placeholder="Re-Enter password"
             />
           </View>
-          <TouchableOpacity style={styles.resetProfile}>
+          <TouchableOpacity style={styles.resetProfile}
+            onPress={() => handleSubmit()}
+          >
             <Text style={styles.resetProfileText}>Reset Profile</Text>
           </TouchableOpacity>
         </View>
